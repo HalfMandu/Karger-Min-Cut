@@ -44,9 +44,9 @@ console.log("Starting MinCut...");
 
 //Begin
 parseKargerFile('./kargerMinCut.txt').then((vertMap) => {
-	let startTime = performance.now();
+	const startTime = performance.now();
 	countMinCuts(vertMap);
-	let endTime = performance.now();
+	const endTime = performance.now();
 	console.log(`KargerMinCut() took ${endTime - startTime} milliseconds`);  // ~300 milliseconds
 });
 
@@ -57,8 +57,8 @@ parseKargerFile('./kargerMinCut.txt').then((vertMap) => {
 const countMinCuts = (vertMap) => {
 	
 	//formula: n^2 * ln(n) for probability of failure < 1/n, for n total vertices
-	let trials = 10;
-	let cuts = [];
+	const trials = 10;
+	const cuts = [];
 
 	//run minCuts repeatedly, tracking each cut produced
 	for (let i=1; i<=trials; i++){
@@ -96,11 +96,11 @@ const minCut = (vertMap) => {
 const pickRandomEdge = (vertMap) => {
 
 	//choose a random key (vertice) from Map
-	let randVert = getRandomKey([...vertMap.keys()]);		
+	const randVert = getRandomKey([...vertMap.keys()]);		
 
 	//choose a random neighboring vertice, given the chosen vertice above
-	let neighbors = vertMap.get(randVert);
-	let randNeighbor = getBoundedRandomNumber(0, neighbors.length-2);	
+	const neighbors = vertMap.get(randVert);
+	const randNeighbor = getBoundedRandomNumber(0, neighbors.length-2);	
 
 	//return an Object with two properties: the 2 vertice keys selected
 	let edge = {};
@@ -145,7 +145,7 @@ const updateVertReferences = (vertMap, edge) => {
 			
 			//move through this neighbor's array, until ALL mentions of v2 have been changed to v1
 			while (currNeighbors.includes(edge.vert2.toString())) {
-				let index = currNeighbors.indexOf(edge.vert2.toString());
+				const index = currNeighbors.indexOf(edge.vert2.toString());
 				currNeighbors[index] = edge.vert1.toString();
 				vertMap.set(Number(neighbor), currNeighbors);
 			}
@@ -163,7 +163,7 @@ const getBoundedRandomNumber = (min, max) => {
 
 //takes in list of keys and returns a random one
 const getRandomKey = (keys) => {
-	let rand = Math.floor(Math.random() * (keys.length));
+	const rand = Math.floor(Math.random() * (keys.length));
 	return keys[rand];
 };
 
